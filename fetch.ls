@@ -57,9 +57,12 @@ sql.connect config, (err) ->
 	get-and-save-results = ({start-date-string, billing-duration}, callback) ->
 		file-name = "data/#{start-date-string}_#{billing-duration}.json"
 		if fs.existsSync file-name
+			console.log "alreday got", start-date-string, billing-duration
 			callback file-name
 			return
 
+		console.log "getting...", start-date-string, billing-duration
+		
 		request = new sql.Request!
 
 		(err, records) <- request.query (get-query start-date-string, billing-duration)
@@ -69,13 +72,15 @@ sql.connect config, (err) ->
 
 		fs.writeFileSync file-name, (JSON.stringify records, null, 4)
 
-		console.log 'done!'
+		console.log "got", start-date-string, billing-duration
 
 		callback file-name
-		process.exit!
 	
 	rs <- forAllA get-and-save-results, (get-all-params moment '2014-01-01')
 	console.log rs
+	
+	console.log "all done!"
+	process.exit!
 
 
 
