@@ -1,0 +1,14 @@
+{
+  "name": "d-arpu",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "lsc app"
+  },
+  "dependencies": {
+    "LiveScript": "*",
+    "prelude-ls": "*",
+    "mssql": "*",
+    "moment": "~2.5.1"
+  }
+}
