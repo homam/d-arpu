@@ -13,6 +13,17 @@ forAllA = (fA, arr, callback) ->
 
 	next!
 
+forAllA_ = (fA, arr, callback) ->
+	next = (i) ->
+		r <- fA(arr[i])
+		if i == (arr.length - 1)
+			callback!
+		else
+			next (i+1)
+
+	next 0
+
+map-sum = (f, arr) --> sum (map f, arr)
 
 moment = require \moment
 
@@ -28,5 +39,8 @@ get-all-params = (start-date) ->
 
 
 
+
+exports.map-sum = map-sum
 exports.forAllA = forAllA
+exports.forAllA_ = forAllA_
 exports.get-all-params = get-all-params
