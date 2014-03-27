@@ -4,7 +4,8 @@ moment = require \moment
 fs = require \fs
 
 
-
+console.log 'run it only once!'
+return
 
 db = require("mongojs").connect \arpu, [\records]
 
