@@ -5,7 +5,8 @@
 sql = require \mssql
 fs = require \fs
 moment = require \moment
-
+prompt = require \prompt
+prompt.start!
 
 
 query = fs.readFileSync 'queries/Billings-Per-Day.sql', 'utf8'
@@ -15,11 +16,12 @@ get-query = (start-date-string, billing-duration) ->
 	aquery.replace '{BILLING_DURATION}', billing-duration
 
 
+(err, {username, password}) <- prompt.get ['username', 'password']
 
 
 config =
-	user: 'homam'
-	password: 'gamma123'
+	user: username
+	password: password
 	server: '172.30.0.165'
 	database: 'Mobitrans'
 
